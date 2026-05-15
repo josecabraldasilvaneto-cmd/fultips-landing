@@ -239,9 +239,9 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
       <a href="#auditoria" class="btn-secondary"><span>Ver histórico</span></a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-badge"><div class="live-dot"></div> Dados ao vivo</div>
-    <div class="hero-stats">
+  <div class="hero-right"><div id="soccer-ball-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.35;pointer-events:none;z-index:0"></div>
+    <div class="hero-badge" style="position:relative;z-index:1"><div class="live-dot"></div> Dados ao vivo</div>
+    <div class="hero-stats" style="position:relative;z-index:1">
       <div class="hero-stat"><div class="hero-stat-num red" id="h-wr">—</div><div class="hero-stat-label">Assertividade</div></div>
       <div class="hero-stat"><div class="hero-stat-num" id="h-roi">—</div><div class="hero-stat-label">ROI médio</div></div>
       <div class="hero-stat"><div class="hero-stat-num" id="h-total">—</div><div class="hero-stat-label">Tips auditadas</div></div>
@@ -452,6 +452,139 @@ async function loadBets(){
   }
 }
 loadBets();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function() {
+  const container = document.getElementById('soccer-ball-canvas');
+  if (!container) return;
+
+  const W = container.clientWidth || 500;
+  const H = container.clientHeight || 500;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setClearColor(0x000000, 0);
+  container.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
+  camera.position.z = 3.5;
+
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+
+  const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight1.position.set(5, 5, 5);
+  scene.add(dirLight1);
+
+  const dirLight2 = new THREE.DirectionalLight(0xE8173A, 0.3);
+  dirLight2.position.set(-5, -3, -5);
+  scene.add(dirLight2);
+
+  // Soccer ball geometry
+  const geo = new THREE.SphereGeometry(1.2, 64, 64);
+
+  // Create canvas texture for soccer ball pattern
+  const texCanvas = document.createElement('canvas');
+  texCanvas.width = 1024;
+  texCanvas.height = 512;
+  const ctx = texCanvas.getContext('2d');
+
+  // Base white
+  ctx.fillStyle = '#F5F4F0';
+  ctx.fillRect(0, 0, 1024, 512);
+
+  // Draw pentagon/hexagon pattern
+  function drawPentagon(cx, cy, r, color) {
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const angle = (i * 2 * Math.PI / 5) - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#CCCCCC';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  function drawHexagon(cx, cy, r, color) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (i * 2 * Math.PI / 6);
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = '#CCCCCC';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  // Black pentagons
+  const positions = [
+    [256, 128], [768, 128], [512, 256], [128, 384], [896, 384],
+    [256, 420], [768, 420], [512, 80],
+  ];
+  positions.forEach(([x, y]) => drawPentagon(x, y, 55, '#0A0A0A'));
+
+  // White hexagons
+  const hexPos = [
+    [384, 180], [640, 180], [200, 280], [820, 280], [512, 370],
+    [300, 90], [724, 90], [180, 450], [844, 450],
+  ];
+  hexPos.forEach(([x, y]) => drawHexagon(x, y, 60, '#EEEEEE'));
+
+  const texture = new THREE.CanvasTexture(texCanvas);
+
+  const mat = new THREE.MeshPhongMaterial({
+    map: texture,
+    shininess: 80,
+    specular: new THREE.Color(0x444444),
+  });
+
+  const ball = new THREE.Mesh(geo, mat);
+  scene.add(ball);
+
+  // Mouse parallax
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
+  });
+
+  let frame = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    frame++;
+    ball.rotation.y += 0.004;
+    ball.rotation.x += 0.001;
+    ball.rotation.y += mouseX * 0.02;
+    ball.rotation.x += mouseY * 0.02;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+})();
 </script>
 </body>
 </html>
