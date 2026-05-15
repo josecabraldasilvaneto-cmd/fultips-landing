@@ -465,6 +465,228 @@ loadBets();
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  renderer.shadowMap.enabled = true;
+  container.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+  camera.position.z = 3.8;
+
+  // Lighting setup for premium look
+  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambient);
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  keyLight.position.set(4, 6, 5);
+  scene.add(keyLight);
+
+  const fillLight = new THREE.DirectionalLight(0xffe0e0, 0.4);
+  fillLight.position.set(-4, 2, 3);
+  scene.add(fillLight);
+
+  const rimLight = new THREE.DirectionalLight(0xE8173A, 0.5);
+  rimLight.position.set(-3, -4, -5);
+  scene.add(rimLight);
+
+  const backLight = new THREE.DirectionalLight(0xffffff, 0.2);
+  backLight.position.set(0, -5, -5);
+  scene.add(backLight);
+
+  // High quality soccer ball texture
+  const texCanvas = document.createElement('canvas');
+  texCanvas.width = 2048;
+  texCanvas.height = 1024;
+  const ctx = texCanvas.getContext('2d');
+
+  // Clean white base
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(0, 0, 2048, 1024);
+
+  // Draw seam lines pattern (realistic soccer ball)
+  function drawSeam(x1, y1, x2, y2, color, width) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+
+  function drawCurvedSeam(points, color, width) {
+    if (points.length < 2) return;
+    ctx.beginPath();
+    ctx.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length - 1; i++) {
+      const mx = (points[i][0] + points[i+1][0]) / 2;
+      const my = (points[i][1] + points[i+1][1]) / 2;
+      ctx.quadraticCurveTo(points[i][0], points[i][1], mx, my);
+    }
+    ctx.lineTo(points[points.length-1][0], points[points.length-1][1]);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+  }
+
+  function drawPanel(points, fillColor, strokeColor) {
+    ctx.beginPath();
+    ctx.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length; i++) {
+      ctx.lineTo(points[i][0], points[i][1]);
+    }
+    ctx.closePath();
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+    ctx.strokeStyle = strokeColor;
+    ctx.lineWidth = 8;
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+  }
+
+  // Adidas-style 8-panel ball with red accents
+  const RED = '#E8173A';
+  const BLACK = '#0A0A0A';
+  const WHITE = '#FFFFFF';
+  const LIGHT_RED = '#FF6B6B';
+
+  // Main panels - alternating white and red accent
+  // Panel 1 - top center (red accent)
+  drawPanel([[900,50],[1148,50],[1200,300],[1024,400],[848,300]], '#FFF0F0', RED);
+  
+  // Panel 2 - top left
+  drawPanel([[500,50],[900,50],[848,300],[600,350],[400,200]], WHITE, BLACK);
+  
+  // Panel 3 - top right  
+  drawPanel([[1148,50],[1548,50],[1648,200],[1448,350],[1200,300]], WHITE, BLACK);
+
+  // Panel 4 - middle left (red accent)
+  drawPanel([[200,350],[400,200],[600,350],[500,550],[250,500]], '#FFF0F0', RED);
+
+  // Panel 5 - middle center left
+  drawPanel([[500,550],[600,350],[848,300],[1024,400],[900,600],[680,650]], WHITE, BLACK);
+
+  // Panel 6 - middle center right
+  drawPanel([[1024,400],[1200,300],[1448,350],[1548,550],[1368,650],[1148,600]], WHITE, BLACK);
+
+  // Panel 7 - middle right (red accent)
+  drawPanel([[1848,350],[1648,200],[1448,350],[1548,550],[1798,500]], '#FFF0F0', RED);
+
+  // Panel 8 - bottom center (red accent)
+  drawPanel([[900,974],[1148,974],[1200,724],[1024,624],[848,724]], '#FFF0F0', RED);
+
+  // Panel 9 - bottom left
+  drawPanel([[500,974],[900,974],[848,724],[600,674],[400,824]], WHITE, BLACK);
+
+  // Panel 10 - bottom right
+  drawPanel([[1148,974],[1548,974],[1648,824],[1448,674],[1200,724]], WHITE, BLACK);
+
+  // Panel 11 - left edge (red)
+  drawPanel([[0,350],[200,350],[250,500],[150,700],[0,650]], '#FFF0F0', RED);
+  drawPanel([[2048,350],[1848,350],[1798,500],[1898,700],[2048,650]], '#FFF0F0', RED);
+
+  // Panel 12 - bottom middle
+  drawPanel([[500,674],[680,650],[900,600],[1024,624],[848,724],[600,674]], WHITE, BLACK);
+  drawPanel([[1148,600],[1368,650],[1548,550],[1448,674],[1200,724],[1024,624]], WHITE, BLACK);
+
+  // Add subtle texture/shading
+  const gradient = ctx.createRadialGradient(700, 300, 50, 700, 300, 600);
+  gradient.addColorStop(0, 'rgba(255,255,255,0.3)');
+  gradient.addColorStop(1, 'rgba(0,0,0,0.08)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 2048, 1024);
+
+  // Add red stripe accents
+  ctx.fillStyle = RED;
+  ctx.fillRect(0, 490, 2048, 12);
+  
+  // Seam lines on top of panels
+  const seamColor = 'rgba(0,0,0,0.25)';
+  const seamW = 5;
+  
+  drawCurvedSeam([[900,50],[870,200],[848,300]], seamColor, seamW);
+  drawCurvedSeam([[1148,50],[1178,200],[1200,300]], seamColor, seamW);
+  drawCurvedSeam([[848,300],[700,350],[600,350]], seamColor, seamW);
+  drawCurvedSeam([[1200,300],[1350,350],[1448,350]], seamColor, seamW);
+  drawCurvedSeam([[600,350],[550,450],[500,550]], seamColor, seamW);
+  drawCurvedSeam([[1448,350],[1498,450],[1548,550]], seamColor, seamW);
+  drawCurvedSeam([[848,724],[700,674],[600,674]], seamColor, seamW);
+  drawCurvedSeam([[1200,724],[1350,674],[1448,674]], seamColor, seamW);
+  drawCurvedSeam([[1024,400],[1024,512],[1024,624]], seamColor, seamW+2);
+  drawCurvedSeam([[500,550],[600,600],[680,650]], seamColor, seamW);
+  drawCurvedSeam([[1548,550],[1448,600],[1368,650]], seamColor, seamW);
+
+  // Bump map canvas for 3D effect
+  const bumpCanvas = document.createElement('canvas');
+  bumpCanvas.width = 512;
+  bumpCanvas.height = 256;
+  const bctx = bumpCanvas.getContext('2d');
+  bctx.fillStyle = '#808080';
+  bctx.fillRect(0, 0, 512, 256);
+  
+  // Add seam bumps
+  bctx.strokeStyle = '#FFFFFF';
+  bctx.lineWidth = 3;
+  bctx.beginPath();
+  bctx.moveTo(230, 12); bctx.lineTo(215, 75); bctx.lineTo(212, 75);
+  bctx.stroke();
+
+  const texture = new THREE.CanvasTexture(texCanvas);
+  texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+  const bumpTexture = new THREE.CanvasTexture(bumpCanvas);
+
+  const geo = new THREE.SphereGeometry(1.3, 128, 128);
+  const mat = new THREE.MeshPhongMaterial({
+    map: texture,
+    bumpMap: bumpTexture,
+    bumpScale: 0.015,
+    shininess: 120,
+    specular: new THREE.Color(0x888888),
+  });
+
+  const ball = new THREE.Mesh(geo, mat);
+  scene.add(ball);
+
+  // Mouse parallax
+  let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+  document.addEventListener('mousemove', (e) => {
+    targetX = (e.clientX / window.innerWidth - 0.5) * 0.6;
+    targetY = (e.clientY / window.innerHeight - 0.5) * 0.4;
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    currentX += (targetX - currentX) * 0.05;
+    currentY += (targetY - currentY) * 0.05;
+    ball.rotation.y += 0.003 + currentX * 0.01;
+    ball.rotation.x += 0.0008 + currentY * 0.008;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+})();
+</script>
+<script>
+(function() {
+  const container = document.getElementById('soccer-ball-canvas');
+  if (!container) return;
+
+  const W = container.clientWidth || 500;
+  const H = container.clientHeight || 500;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(W, H);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
