@@ -216,9 +216,136 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
   .nav-links{display:none}
 }
 </style>
+
+<style>
+#intro-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: #0A0A0A;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#intro-overlay.hide {
+  animation: introFadeOut 0.6s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+@keyframes introFadeOut {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.04); pointer-events: none; }
+}
+
+.intro-logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-text {
+  font-family: 'Barlow Condensed', 'DejaVu Sans', sans-serif;
+  font-size: clamp(80px, 15vw, 160px);
+  font-weight: 900;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  position: relative;
+  user-select: none;
+  opacity: 0;
+}
+
+.intro-text .ful { color: #FFFFFF; }
+.intro-text .tips { color: #FFFFFF; }
+
+.intro-marker {
+  position: absolute;
+  top: 0;
+  left: -5%;
+  width: 0%;
+  height: 100%;
+  background: #E8173A;
+  z-index: 2;
+  border-radius: 2px;
+  transform-origin: left center;
+}
+
+.intro-reveal {
+  position: absolute;
+  top: 0;
+  left: -5%;
+  width: 0%;
+  height: 100%;
+  background: transparent;
+  z-index: 3;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.intro-reveal-text {
+  font-family: 'Barlow Condensed', 'DejaVu Sans', sans-serif;
+  font-size: clamp(80px, 15vw, 160px);
+  font-weight: 900;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.intro-reveal-text .tips-part { color: #E8173A; }
+
+.intro-tagline {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0);
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+
+.intro-tagline.show { color: rgba(255,255,255,0.5); }
+
+.intro-bar-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0%; height: 5px;
+  background: #E8173A;
+}
+.intro-bar-bottom {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 0%; height: 5px;
+  background: #E8173A;
+}
+</style>
 </head>
 <body>
 
+
+<div id="intro-overlay">
+  <div class="intro-bar-top" id="intro-bar-top"></div>
+  <div class="intro-bar-bottom" id="intro-bar-bottom"></div>
+  <div class="intro-logo-wrap" id="intro-logo-wrap">
+    <div class="intro-text" id="intro-text">
+      <span class="ful">FUL</span><span class="tips">TIPS</span>
+    </div>
+    <div class="intro-marker" id="intro-marker"></div>
+    <div class="intro-reveal" id="intro-reveal">
+      <div class="intro-reveal-text"><span>FUL</span><span class="tips-part">TIPS</span></div>
+    </div>
+    <div class="intro-tagline" id="intro-tagline">Apostas com números reais.</div>
+  </div>
+</div>
 <nav>
   <svg width="160" height="38" viewBox="0 0 200 48" role="img" style="display:block"><title>Fultips</title><rect x="0" y="8" width="6" height="32" fill="#E8173A"/><text x="16" y="38" font-family="Barlow Condensed,sans-serif" font-size="38" font-weight="900" fill="#0A0A0A" letter-spacing="2">FUL</text><text x="84" y="38" font-family="Barlow Condensed,sans-serif" font-size="38" font-weight="900" fill="#E8173A" letter-spacing="2">TIPS</text></svg>
   <div class="nav-links">
@@ -806,6 +933,105 @@ loadBets();
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
   });
+})();
+</script>
+
+<script>
+(function() {
+  // Prevent scroll during intro
+  document.body.style.overflow = 'hidden';
+
+  const overlay = document.getElementById('intro-overlay');
+  const marker = document.getElementById('intro-marker');
+  const reveal = document.getElementById('intro-reveal');
+  const text = document.getElementById('intro-text');
+  const tagline = document.getElementById('intro-tagline');
+  const barTop = document.getElementById('intro-bar-top');
+  const barBottom = document.getElementById('intro-bar-bottom');
+
+  let startTime = null;
+
+  // Timeline (ms):
+  // 0     - bars animate in
+  // 300   - text fades in (hidden behind marker)
+  // 500   - marker sweeps right (600ms duration)
+  // 1100  - reveal follows marker
+  // 1700  - tagline appears
+  // 2200  - pause
+  // 2600  - fade out
+
+  function ease(t) {
+    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  // Phase 1: bars (0-300ms)
+  setTimeout(() => {
+    barTop.style.transition = 'width 0.4s cubic-bezier(.22,1,.36,1)';
+    barTop.style.width = '100%';
+    barBottom.style.transition = 'width 0.4s cubic-bezier(.22,1,.36,1)';
+    barBottom.style.width = '100%';
+  }, 50);
+
+  // Phase 2: show text (dim)
+  setTimeout(() => {
+    text.style.opacity = '0.12';
+    text.style.transition = 'opacity 0.3s ease';
+  }, 300);
+
+  // Phase 3: marker sweep
+  setTimeout(() => {
+    marker.style.transition = 'none';
+    marker.style.width = '0%';
+    marker.style.left = '-2%';
+
+    let sweepStart = null;
+    const sweepDuration = 550;
+
+    function sweepMarker(ts) {
+      if (!sweepStart) sweepStart = ts;
+      const elapsed = ts - sweepStart;
+      const progress = Math.min(elapsed / sweepDuration, 1);
+      const eased = ease(progress);
+
+      // Marker leads by ~8%, reveal follows
+      const markerPos = lerp(-2, 108, eased);
+      const revealPos = lerp(-2, 108, Math.max(0, eased - 0.0));
+
+      marker.style.left = Math.min(markerPos, 105) + '%';
+      marker.style.width = '10%';
+
+      if (progress > 0.05) {
+        reveal.style.left = '-2%';
+        reveal.style.width = Math.min(revealPos + 2, 110) + '%';
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(sweepMarker);
+      } else {
+        // Hide marker after sweep
+        marker.style.transition = 'opacity 0.2s ease';
+        marker.style.opacity = '0';
+        text.style.opacity = '0';
+      }
+    }
+    requestAnimationFrame(sweepMarker);
+  }, 550);
+
+  // Phase 4: tagline
+  setTimeout(() => {
+    tagline.classList.add('show');
+  }, 1350);
+
+  // Phase 5: fade out
+  setTimeout(() => {
+    overlay.classList.add('hide');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 600);
+  }, 2400);
 })();
 </script>
 </body>
