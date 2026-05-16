@@ -13,7 +13,6 @@ html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--text);font-family:'Barlow',sans-serif;line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 
-/* REVEAL ANIMATIONS */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s cubic-bezier(.22,1,.36,1),transform 0.7s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:none}
 .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s cubic-bezier(.22,1,.36,1),transform 0.7s cubic-bezier(.22,1,.36,1)}
@@ -26,7 +25,6 @@ a{color:inherit;text-decoration:none}
 .delay-4{transition-delay:0.4s}
 .delay-5{transition-delay:0.5s}
 
-/* NAV */
 nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;border-bottom:2px solid var(--black);position:sticky;top:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);z-index:100;transform:translateY(-100%);animation:navSlide 0.6s cubic-bezier(.22,1,.36,1) 0.2s forwards}
 @keyframes navSlide{to{transform:translateY(0)}}
 .nav-links{display:flex;align-items:center;gap:2rem}
@@ -39,7 +37,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5r
 .nav-cta:hover::before{transform:translateX(0)}
 .nav-cta span{position:relative;z-index:1}
 
-/* HERO */
 .hero{display:grid;grid-template-columns:1fr 1fr;min-height:92vh;border-bottom:2px solid var(--black)}
 .hero-left{padding:4rem 3rem 4rem 2.5rem;display:flex;flex-direction:column;justify-content:center;border-right:2px solid var(--black);position:relative;overflow:hidden}
 .hero-left::after{content:'';position:absolute;bottom:0;right:0;width:300px;height:300px;background:var(--red);opacity:0.03;border-radius:50%;transform:translate(30%,30%);animation:breathe 4s ease-in-out infinite}
@@ -77,7 +74,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5r
 .live-dot{width:6px;height:6px;background:var(--white);border-radius:50%;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
 
-/* TICKER */
 .ticker{background:var(--red);border-top:2px solid var(--red-dark);border-bottom:2px solid var(--red-dark);overflow:hidden;height:42px;display:flex;align-items:center}
 .ticker-inner{display:flex;animation:ticker 35s linear infinite;white-space:nowrap}
 .ticker:hover .ticker-inner{animation-play-state:paused}
@@ -85,7 +81,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5r
 .ticker-item{font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);padding:0 2rem;display:inline-flex;align-items:center;gap:1rem}
 .ticker-item::after{content:'•';opacity:0.5}
 
-/* PROOF */
 .proof-strip{background:var(--off);border-top:2px solid var(--black);border-bottom:2px solid var(--black);padding:3rem 2.5rem}
 .proof-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--black)}
 .proof-item{padding:2rem;border-right:2px solid var(--black);text-align:center;transition:background 0.3s,transform 0.3s}
@@ -97,14 +92,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:0 2.5r
 .proof-num span{color:var(--red)}
 .proof-label{font-size:0.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-top:0.4rem;transition:color 0.3s}
 
-/* SECTION */
 .section{padding:5rem 2.5rem;max-width:1200px;margin:0 auto}
 .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:2px solid var(--black)}
 .section-label{font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:0.5rem}
 .section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(2.5rem,4vw,3.5rem);font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-0.5px}
 .section-count{font-family:'Barlow Condensed',sans-serif;font-size:4rem;font-weight:900;color:var(--gray-light);line-height:1}
 
-/* AUDIT */
 .audit-wrap{border:2px solid var(--black);overflow:hidden}
 .audit-top{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:var(--black);color:var(--white)}
 .audit-top-title{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
@@ -134,7 +127,6 @@ tr:hover .badge-win{background:var(--text)}
 .loading-row td,.error-row td{text-align:center;color:var(--gray);padding:3rem;font-size:0.9rem}
 .error-row td{color:var(--red)}
 
-/* FEATURES */
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--black)}
 .feat{padding:2.5rem 2rem;border-right:2px solid var(--black);border-bottom:2px solid var(--black);position:relative;overflow:hidden;transition:background 0.35s,color 0.35s;cursor:default}
 .feat::after{content:'';position:absolute;inset:0;background:var(--black);transform:translateY(101%);transition:transform 0.4s cubic-bezier(.22,1,.36,1)}
@@ -148,7 +140,6 @@ tr:hover .badge-win{background:var(--text)}
 .feat-title{font-family:'Barlow Condensed',sans-serif;font-size:1.3rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.6rem;transition:color 0.35s}
 .feat-desc{font-size:0.88rem;color:var(--gray);line-height:1.6;transition:color 0.35s}
 
-/* PLANS */
 .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--black)}
 .plan{padding:2.5rem 2rem;border-right:2px solid var(--black);display:flex;flex-direction:column;transition:transform 0.3s cubic-bezier(.22,1,.36,1)}
 .plan:hover{transform:translateY(-4px)}
@@ -184,7 +175,6 @@ tr:hover .badge-win{background:var(--text)}
 .plan-btn.outline::before{background:var(--red)}
 .plan-btn.outline:hover{border-color:var(--red)}
 
-/* FOOTER */
 footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
 .footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:2rem;margin-bottom:1.5rem}
 .footer-links{display:flex;gap:2rem}
@@ -196,7 +186,6 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
 .footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.3)}
 .footer-disclaimer{font-size:0.72rem;color:rgba(255,255,255,0.25);max-width:600px;line-height:1.5}
 
-/* COUNTER ANIMATION */
 @keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .counting{animation:countUp 0.5s ease forwards}
 
@@ -218,127 +207,30 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
 </style>
 
 <style>
-#intro-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: #0A0A0A;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-#intro-overlay.hide {
-  animation: introFadeOut 0.6s cubic-bezier(.22,1,.36,1) forwards;
-}
-
-@keyframes introFadeOut {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.04); pointer-events: none; }
-}
-
-.intro-logo-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.intro-text {
-  font-family: 'Barlow Condensed', 'DejaVu Sans', sans-serif;
-  font-size: clamp(80px, 15vw, 160px);
-  font-weight: 900;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  position: relative;
-  user-select: none;
-  opacity: 0;
-}
-
-.intro-text .ful { color: #FFFFFF; }
-.intro-text .tips { color: #FFFFFF; }
-
-.intro-marker {
-  position: absolute;
-  top: 0;
-  left: -5%;
-  width: 0%;
-  height: 100%;
-  background: #E8173A;
-  z-index: 2;
-  border-radius: 2px;
-  transform-origin: left center;
-}
-
-.intro-reveal {
-  position: absolute;
-  top: 0;
-  left: -5%;
-  width: 0%;
-  height: 100%;
-  background: transparent;
-  z-index: 3;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.intro-reveal-text {
-  font-family: 'Barlow Condensed', 'DejaVu Sans', sans-serif;
-  font-size: clamp(80px, 15vw, 160px);
-  font-weight: 900;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.intro-reveal-text .tips-part { color: #E8173A; }
-
-.intro-tagline {
-  position: absolute;
-  bottom: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Barlow', sans-serif;
-  font-size: clamp(14px, 2vw, 20px);
-  font-weight: 600;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0);
-  white-space: nowrap;
-  transition: color 0.4s ease;
-}
-
-.intro-tagline.show { color: rgba(255,255,255,0.5); }
-
-.intro-bar-top {
-  position: absolute;
-  top: 0; left: 0;
-  width: 0%; height: 5px;
-  background: #E8173A;
-}
-.intro-bar-bottom {
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 0%; height: 5px;
-  background: #E8173A;
-}
+#intro-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#0A0A0A;z-index:99999;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#intro-overlay.hide{animation:introFadeOut 0.6s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes introFadeOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);pointer-events:none}}
+.intro-logo-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.intro-text{font-family:'Barlow Condensed','DejaVu Sans',sans-serif;font-size:clamp(80px,15vw,160px);font-weight:900;letter-spacing:8px;text-transform:uppercase;color:#FFFFFF;position:relative;user-select:none;opacity:0}
+.intro-text .ful{color:#FFFFFF}
+.intro-text .tips{color:#FFFFFF}
+.intro-marker{position:absolute;top:0;left:-5%;width:0%;height:100%;background:#E8173A;z-index:2;border-radius:2px;transform-origin:left center}
+.intro-reveal{position:absolute;top:0;left:-5%;width:0%;height:100%;background:transparent;z-index:3;overflow:hidden;white-space:nowrap}
+.intro-reveal-text{font-family:'Barlow Condensed','DejaVu Sans',sans-serif;font-size:clamp(80px,15vw,160px);font-weight:900;letter-spacing:8px;text-transform:uppercase;color:#FFFFFF;user-select:none;white-space:nowrap}
+.intro-reveal-text .tips-part{color:#E8173A}
+.intro-tagline{position:absolute;bottom:-50px;left:50%;transform:translateX(-50%);font-family:'Barlow',sans-serif;font-size:clamp(14px,2vw,20px);font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0);white-space:nowrap;transition:color 0.4s ease}
+.intro-tagline.show{color:rgba(255,255,255,0.5)}
+.intro-bar-top{position:absolute;top:0;left:0;width:0%;height:5px;background:#E8173A}
+.intro-bar-bottom{position:absolute;bottom:0;right:0;width:0%;height:5px;background:#E8173A}
 </style>
 </head>
 <body>
-
 
 <div id="intro-overlay">
   <div class="intro-bar-top" id="intro-bar-top"></div>
   <div class="intro-bar-bottom" id="intro-bar-bottom"></div>
   <div class="intro-logo-wrap" id="intro-logo-wrap">
-    <div class="intro-text" id="intro-text">
-      <span class="ful">FUL</span><span class="tips">TIPS</span>
-    </div>
+    <div class="intro-text" id="intro-text"><span class="ful">FUL</span><span class="tips">TIPS</span></div>
     <div class="intro-marker" id="intro-marker"></div>
     <div class="intro-reveal" id="intro-reveal">
       <div class="intro-reveal-text"><span>FUL</span><span class="tips-part">TIPS</span></div>
@@ -346,6 +238,7 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
     <div class="intro-tagline" id="intro-tagline">Apostas com números reais.</div>
   </div>
 </div>
+
 <nav>
   <svg width="160" height="38" viewBox="0 0 200 48" role="img" style="display:block"><title>Fultips</title><rect x="0" y="8" width="6" height="32" fill="#E8173A"/><text x="16" y="38" font-family="Barlow Condensed,sans-serif" font-size="38" font-weight="900" fill="#0A0A0A" letter-spacing="2">FUL</text><text x="84" y="38" font-family="Barlow Condensed,sans-serif" font-size="38" font-weight="900" fill="#E8173A" letter-spacing="2">TIPS</text></svg>
   <div class="nav-links">
@@ -366,7 +259,8 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
       <a href="#auditoria" class="btn-secondary"><span>Ver histórico</span></a>
     </div>
   </div>
-  <div class="hero-right"><div id="soccer-ball-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.35;pointer-events:none;z-index:0"></div>
+  <div class="hero-right">
+    <canvas id="soccer-ball-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.4;pointer-events:none;z-index:0;display:block"></canvas>
     <div class="hero-badge" style="position:relative;z-index:1"><div class="live-dot"></div> Dados ao vivo</div>
     <div class="hero-stats" style="position:relative;z-index:1">
       <div class="hero-stat"><div class="hero-stat-num red" id="h-wr">—</div><div class="hero-stat-label">Assertividade</div></div>
@@ -487,17 +381,16 @@ footer{background:var(--black);color:var(--white);padding:3rem 2.5rem}
   </div>
 </footer>
 
+<!-- Supabase + Stats -->
 <script>
 const SUPABASE_URL='https://ziorqlceslizopdcsmux.supabase.co';
 const SUPABASE_KEY='sb_publishable_TuhHxFurqOyNso5wDzzbkg_CvLr029I';
 
-/* SCROLL REVEAL */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
 
-/* ANIMATED COUNTER */
 function animateCounter(el,target,suffix,decimals){
   const start=0,duration=1200,startTime=performance.now();
   const isFloat=target%1!==0||decimals>0;
@@ -519,14 +412,11 @@ function setStats(wr,roi,total,profit){
   const wrNum=parseFloat(wr),roiNum=parseFloat(roi),profNum=parseFloat(profit);
   const roiSign=roiNum>=0?'+':'';const profSign=profNum>=0?'+':'';
   ['h-wr','p-wr','k-wr'].forEach(id=>{const el=document.getElementById(id);if(el)animateCounter(el,wrNum,'%',1)});
-  ['h-roi','p-roi','k-roi'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=roiSign+roiNum.toFixed(1)+'%';animateCounter(el,Math.abs(roiNum),(roiSign+Math.sign(roiNum)<0?'':roiSign)+'%',1)}});
+  const roiEls=['h-roi','p-roi','k-roi'];
+  roiEls.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=roiSign+roiNum.toFixed(1)+'%'});
   ['h-total','p-total'].forEach(id=>{const el=document.getElementById(id);if(el)animateCounter(el,total,'',0)});
   const ac=document.getElementById('audit-count');if(ac)animateCounter(ac,total,'',0);
-  const kp=document.getElementById('k-profit');
-  if(kp)kp.textContent=profSign+profNum.toFixed(2)+'u';
-  document.getElementById('h-roi').textContent=roiSign+roiNum.toFixed(1)+'%';
-  document.getElementById('p-roi').textContent=roiSign+roiNum.toFixed(1)+'%';
-  document.getElementById('k-roi').textContent=roiSign+roiNum.toFixed(1)+'%';
+  const kp=document.getElementById('k-profit');if(kp)kp.textContent=profSign+profNum.toFixed(2)+'u';
 }
 
 async function loadBets(){
@@ -554,354 +444,159 @@ async function loadBets(){
 loadBets();
 </script>
 
+<!-- Three.js — Bola de futebol realista (script único, sem conflito) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function() {
-  const container = document.getElementById('soccer-ball-canvas');
-  if (!container) return;
+  const canvas = document.getElementById('soccer-ball-canvas');
+  if (!canvas) return;
 
-  const W = container.clientWidth || 500;
-  const H = container.clientHeight || 500;
+  const parent = canvas.parentElement;
+  const W = parent.clientWidth || 600;
+  const H = parent.clientHeight || 600;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  // Renderer direto no canvas existente
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
   renderer.setSize(W, H);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
-  renderer.shadowMap.enabled = true;
-  container.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
-  camera.position.z = 3.8;
+  const camera = new THREE.PerspectiveCamera(40, W / H, 0.1, 100);
+  camera.position.z = 4.2;
 
-  // Lighting setup for premium look
-  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
-  scene.add(ambient);
+  // Iluminação premium
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
-  keyLight.position.set(4, 6, 5);
-  scene.add(keyLight);
+  const key = new THREE.DirectionalLight(0xffffff, 1.1);
+  key.position.set(5, 7, 6);
+  scene.add(key);
 
-  const fillLight = new THREE.DirectionalLight(0xffe0e0, 0.4);
-  fillLight.position.set(-4, 2, 3);
-  scene.add(fillLight);
+  const fill = new THREE.DirectionalLight(0xffeaea, 0.35);
+  fill.position.set(-5, 2, 4);
+  scene.add(fill);
 
-  const rimLight = new THREE.DirectionalLight(0xE8173A, 0.5);
-  rimLight.position.set(-3, -4, -5);
-  scene.add(rimLight);
+  const rim = new THREE.DirectionalLight(0xE8173A, 0.45);
+  rim.position.set(-3, -5, -6);
+  scene.add(rim);
 
-  const backLight = new THREE.DirectionalLight(0xffffff, 0.2);
-  backLight.position.set(0, -5, -5);
-  scene.add(backLight);
+  // --- Textura da bola no canvas 2D ---
+  const TEX_W = 2048, TEX_H = 1024;
+  const tc = document.createElement('canvas');
+  tc.width = TEX_W; tc.height = TEX_H;
+  const cx = tc.getContext('2d');
 
-  // High quality soccer ball texture
-  const texCanvas = document.createElement('canvas');
-  texCanvas.width = 2048;
-  texCanvas.height = 1024;
-  const ctx = texCanvas.getContext('2d');
+  // Fundo branco limpo
+  cx.fillStyle = '#EFEFEF';
+  cx.fillRect(0, 0, TEX_W, TEX_H);
 
-  // Clean white base
-  ctx.fillStyle = '#FFFFFF';
-  ctx.fillRect(0, 0, 2048, 1024);
+  // Padrão clássico de bola de futebol:
+  // Pentágonos pretos dispostos em grade esférica aproximada
+  const BLACK = '#111111';
+  const SEAM = 'rgba(0,0,0,0.18)';
 
-  // Draw seam lines pattern (realistic soccer ball)
-  function drawSeam(x1, y1, x2, y2, color, width) {
+  function polygon(ctx, cx2, cy2, r, sides, rotation, fill, stroke, strokeW) {
     ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    ctx.lineCap = 'round';
-    ctx.stroke();
-  }
-
-  function drawCurvedSeam(points, color, width) {
-    if (points.length < 2) return;
-    ctx.beginPath();
-    ctx.moveTo(points[0][0], points[0][1]);
-    for (let i = 1; i < points.length - 1; i++) {
-      const mx = (points[i][0] + points[i+1][0]) / 2;
-      const my = (points[i][1] + points[i+1][1]) / 2;
-      ctx.quadraticCurveTo(points[i][0], points[i][1], mx, my);
-    }
-    ctx.lineTo(points[points.length-1][0], points[points.length-1][1]);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.stroke();
-  }
-
-  function drawPanel(points, fillColor, strokeColor) {
-    ctx.beginPath();
-    ctx.moveTo(points[0][0], points[0][1]);
-    for (let i = 1; i < points.length; i++) {
-      ctx.lineTo(points[i][0], points[i][1]);
+    for (let i = 0; i < sides; i++) {
+      const a = (i / sides) * Math.PI * 2 + rotation;
+      const x = cx2 + r * Math.cos(a);
+      const y = cy2 + r * Math.sin(a);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.fillStyle = fillColor;
-    ctx.fill();
-    ctx.strokeStyle = strokeColor;
-    ctx.lineWidth = 8;
-    ctx.lineJoin = 'round';
-    ctx.stroke();
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = strokeW || 6; ctx.stroke(); }
   }
 
-  // Adidas-style 8-panel ball with red accents
-  const RED = '#E8173A';
-  const BLACK = '#0A0A0A';
-  const WHITE = '#FFFFFF';
-  const LIGHT_RED = '#FF6B6B';
+  // Hexágonos brancos com borda escura (base)
+  const hexR = 130;
+  const hexPositions = [
+    [512, 256], [1024, 256], [1536, 256],
+    [256, 512], [768, 512], [1280, 512], [1792, 512],
+    [512, 768], [1024, 768], [1536, 768],
+    [0, 256], [2048, 256], [0, 768], [2048, 768],
+    [256, 0], [1024, 0], [1792, 0],
+    [256, 1024], [1024, 1024], [1792, 1024],
+  ];
+  hexPositions.forEach(([hx, hy]) => {
+    polygon(cx, hx, hy, hexR, 6, Math.PI / 6, '#F5F5F5', '#CCCCCC', 4);
+  });
 
-  // Main panels - alternating white and red accent
-  // Panel 1 - top center (red accent)
-  drawPanel([[900,50],[1148,50],[1200,300],[1024,400],[848,300]], '#FFF0F0', RED);
-  
-  // Panel 2 - top left
-  drawPanel([[500,50],[900,50],[848,300],[600,350],[400,200]], WHITE, BLACK);
-  
-  // Panel 3 - top right  
-  drawPanel([[1148,50],[1548,50],[1648,200],[1448,350],[1200,300]], WHITE, BLACK);
+  // Pentágonos pretos (padrão clássico)
+  const pentR = 90;
+  const pentPositions = [
+    [512, 0], [1024, 128], [1536, 0],
+    [128, 320], [640, 384], [1408, 384], [1920, 320],
+    [256, 640], [768, 640], [1280, 640], [1792, 640],
+    [512, 896], [1024, 896], [1536, 896],
+    [0, 512], [2048, 512],
+    [384, 192], [1664, 192],
+    [384, 832], [1664, 832],
+  ];
+  pentPositions.forEach(([px, py]) => {
+    polygon(cx, px, py, pentR, 5, -Math.PI / 2, BLACK, '#333333', 3);
+  });
 
-  // Panel 4 - middle left (red accent)
-  drawPanel([[200,350],[400,200],[600,350],[500,550],[250,500]], '#FFF0F0', RED);
+  // Costura sutil
+  cx.strokeStyle = SEAM;
+  cx.lineWidth = 3;
 
-  // Panel 5 - middle center left
-  drawPanel([[500,550],[600,350],[848,300],[1024,400],[900,600],[680,650]], WHITE, BLACK);
+  function seam(x1, y1, x2, y2) {
+    cx.beginPath();
+    cx.moveTo(x1, y1);
+    cx.lineTo(x2, y2);
+    cx.stroke();
+  }
 
-  // Panel 6 - middle center right
-  drawPanel([[1024,400],[1200,300],[1448,350],[1548,550],[1368,650],[1148,600]], WHITE, BLACK);
+  // Linhas de costura ligando os pentágonos
+  [[512,0,512,256],[1024,128,1024,256],[1536,0,1536,256],
+   [128,320,256,512],[640,384,512,512],[1408,384,1536,512],[1920,320,1792,512],
+   [512,256,640,384],[1024,256,1024,384],[1536,256,1408,384],
+   [256,512,256,640],[768,512,768,640],[1280,512,1280,640],[1792,512,1792,640],
+   [512,768,512,896],[1024,768,1024,896],[1536,768,1536,896]
+  ].forEach(([x1,y1,x2,y2]) => seam(x1,y1,x2,y2));
 
-  // Panel 7 - middle right (red accent)
-  drawPanel([[1848,350],[1648,200],[1448,350],[1548,550],[1798,500]], '#FFF0F0', RED);
+  // Highlight sutil de luz
+  const hl = cx.createRadialGradient(700, 280, 20, 700, 280, 500);
+  hl.addColorStop(0, 'rgba(255,255,255,0.22)');
+  hl.addColorStop(1, 'rgba(0,0,0,0)');
+  cx.fillStyle = hl;
+  cx.fillRect(0, 0, TEX_W, TEX_H);
 
-  // Panel 8 - bottom center (red accent)
-  drawPanel([[900,974],[1148,974],[1200,724],[1024,624],[848,724]], '#FFF0F0', RED);
-
-  // Panel 9 - bottom left
-  drawPanel([[500,974],[900,974],[848,724],[600,674],[400,824]], WHITE, BLACK);
-
-  // Panel 10 - bottom right
-  drawPanel([[1148,974],[1548,974],[1648,824],[1448,674],[1200,724]], WHITE, BLACK);
-
-  // Panel 11 - left edge (red)
-  drawPanel([[0,350],[200,350],[250,500],[150,700],[0,650]], '#FFF0F0', RED);
-  drawPanel([[2048,350],[1848,350],[1798,500],[1898,700],[2048,650]], '#FFF0F0', RED);
-
-  // Panel 12 - bottom middle
-  drawPanel([[500,674],[680,650],[900,600],[1024,624],[848,724],[600,674]], WHITE, BLACK);
-  drawPanel([[1148,600],[1368,650],[1548,550],[1448,674],[1200,724],[1024,624]], WHITE, BLACK);
-
-  // Add subtle texture/shading
-  const gradient = ctx.createRadialGradient(700, 300, 50, 700, 300, 600);
-  gradient.addColorStop(0, 'rgba(255,255,255,0.3)');
-  gradient.addColorStop(1, 'rgba(0,0,0,0.08)');
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 2048, 1024);
-
-  // Add red stripe accents
-  ctx.fillStyle = RED;
-  ctx.fillRect(0, 490, 2048, 12);
-  
-  // Seam lines on top of panels
-  const seamColor = 'rgba(0,0,0,0.25)';
-  const seamW = 5;
-  
-  drawCurvedSeam([[900,50],[870,200],[848,300]], seamColor, seamW);
-  drawCurvedSeam([[1148,50],[1178,200],[1200,300]], seamColor, seamW);
-  drawCurvedSeam([[848,300],[700,350],[600,350]], seamColor, seamW);
-  drawCurvedSeam([[1200,300],[1350,350],[1448,350]], seamColor, seamW);
-  drawCurvedSeam([[600,350],[550,450],[500,550]], seamColor, seamW);
-  drawCurvedSeam([[1448,350],[1498,450],[1548,550]], seamColor, seamW);
-  drawCurvedSeam([[848,724],[700,674],[600,674]], seamColor, seamW);
-  drawCurvedSeam([[1200,724],[1350,674],[1448,674]], seamColor, seamW);
-  drawCurvedSeam([[1024,400],[1024,512],[1024,624]], seamColor, seamW+2);
-  drawCurvedSeam([[500,550],[600,600],[680,650]], seamColor, seamW);
-  drawCurvedSeam([[1548,550],[1448,600],[1368,650]], seamColor, seamW);
-
-  // Bump map canvas for 3D effect
-  const bumpCanvas = document.createElement('canvas');
-  bumpCanvas.width = 512;
-  bumpCanvas.height = 256;
-  const bctx = bumpCanvas.getContext('2d');
-  bctx.fillStyle = '#808080';
-  bctx.fillRect(0, 0, 512, 256);
-  
-  // Add seam bumps
-  bctx.strokeStyle = '#FFFFFF';
-  bctx.lineWidth = 3;
-  bctx.beginPath();
-  bctx.moveTo(230, 12); bctx.lineTo(215, 75); bctx.lineTo(212, 75);
-  bctx.stroke();
-
-  const texture = new THREE.CanvasTexture(texCanvas);
+  const texture = new THREE.CanvasTexture(tc);
   texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
-  const bumpTexture = new THREE.CanvasTexture(bumpCanvas);
-
-  const geo = new THREE.SphereGeometry(1.3, 128, 128);
+  // Geometria esférica de alta qualidade
+  const geo = new THREE.SphereGeometry(1.35, 128, 128);
   const mat = new THREE.MeshPhongMaterial({
     map: texture,
-    bumpMap: bumpTexture,
-    bumpScale: 0.015,
-    shininess: 120,
-    specular: new THREE.Color(0x888888),
+    shininess: 90,
+    specular: new THREE.Color(0x666666),
   });
 
   const ball = new THREE.Mesh(geo, mat);
   scene.add(ball);
 
-  // Mouse parallax
-  let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-  document.addEventListener('mousemove', (e) => {
-    targetX = (e.clientX / window.innerWidth - 0.5) * 0.6;
-    targetY = (e.clientY / window.innerHeight - 0.5) * 0.4;
+  // Paralaxe com mouse
+  let mx = 0, my = 0, cx2 = 0, cy2 = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX / window.innerWidth - 0.5) * 0.5;
+    my = (e.clientY / window.innerHeight - 0.5) * 0.35;
   });
 
   function animate() {
     requestAnimationFrame(animate);
-    currentX += (targetX - currentX) * 0.05;
-    currentY += (targetY - currentY) * 0.05;
-    ball.rotation.y += 0.003 + currentX * 0.01;
-    ball.rotation.x += 0.0008 + currentY * 0.008;
+    cx2 += (mx - cx2) * 0.04;
+    cy2 += (my - cy2) * 0.04;
+    ball.rotation.y += 0.004 + cx2 * 0.012;
+    ball.rotation.x += 0.0012 + cy2 * 0.008;
     renderer.render(scene, camera);
   }
   animate();
 
   window.addEventListener('resize', () => {
-    const w = container.clientWidth;
-    const h = container.clientHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  });
-})();
-</script>
-<script>
-(function() {
-  const container = document.getElementById('soccer-ball-canvas');
-  if (!container) return;
-
-  const W = container.clientWidth || 500;
-  const H = container.clientHeight || 500;
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(W, H);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setClearColor(0x000000, 0);
-  container.appendChild(renderer.domElement);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
-  camera.position.z = 3.5;
-
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-  scene.add(ambientLight);
-
-  const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-  dirLight1.position.set(5, 5, 5);
-  scene.add(dirLight1);
-
-  const dirLight2 = new THREE.DirectionalLight(0xE8173A, 0.3);
-  dirLight2.position.set(-5, -3, -5);
-  scene.add(dirLight2);
-
-  // Soccer ball geometry
-  const geo = new THREE.SphereGeometry(1.2, 64, 64);
-
-  // Create canvas texture for soccer ball pattern
-  const texCanvas = document.createElement('canvas');
-  texCanvas.width = 1024;
-  texCanvas.height = 512;
-  const ctx = texCanvas.getContext('2d');
-
-  // Base white
-  ctx.fillStyle = '#F5F4F0';
-  ctx.fillRect(0, 0, 1024, 512);
-
-  // Draw pentagon/hexagon pattern
-  function drawPentagon(cx, cy, r, color) {
-    ctx.beginPath();
-    for (let i = 0; i < 5; i++) {
-      const angle = (i * 2 * Math.PI / 5) - Math.PI / 2;
-      const x = cx + r * Math.cos(angle);
-      const y = cy + r * Math.sin(angle);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.strokeStyle = '#CCCCCC';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-  }
-
-  function drawHexagon(cx, cy, r, color) {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const angle = (i * 2 * Math.PI / 6);
-      const x = cx + r * Math.cos(angle);
-      const y = cy + r * Math.sin(angle);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    }
-    ctx.closePath();
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.strokeStyle = '#CCCCCC';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-  }
-
-  // Black pentagons
-  const positions = [
-    [256, 128], [768, 128], [512, 256], [128, 384], [896, 384],
-    [256, 420], [768, 420], [512, 80],
-  ];
-  positions.forEach(([x, y]) => drawPentagon(x, y, 55, '#0A0A0A'));
-
-  // White hexagons
-  const hexPos = [
-    [384, 180], [640, 180], [200, 280], [820, 280], [512, 370],
-    [300, 90], [724, 90], [180, 450], [844, 450],
-  ];
-  hexPos.forEach(([x, y]) => drawHexagon(x, y, 60, '#EEEEEE'));
-
-  const texture = new THREE.CanvasTexture(texCanvas);
-
-  const mat = new THREE.MeshPhongMaterial({
-    map: texture,
-    shininess: 80,
-    specular: new THREE.Color(0x444444),
-  });
-
-  const ball = new THREE.Mesh(geo, mat);
-  scene.add(ball);
-
-  // Mouse parallax
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 0.4;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 0.4;
-  });
-
-  let frame = 0;
-  function animate() {
-    requestAnimationFrame(animate);
-    frame++;
-    ball.rotation.y += 0.004;
-    ball.rotation.x += 0.001;
-    ball.rotation.y += mouseX * 0.02;
-    ball.rotation.x += mouseY * 0.02;
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  window.addEventListener('resize', () => {
-    const w = container.clientWidth;
-    const h = container.clientHeight;
+    const w = parent.clientWidth;
+    const h = parent.clientHeight;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
@@ -909,11 +604,10 @@ loadBets();
 })();
 </script>
 
+<!-- Intro overlay -->
 <script>
 (function() {
-  // Prevent scroll during intro
   document.body.style.overflow = 'hidden';
-
   const overlay = document.getElementById('intro-overlay');
   const marker = document.getElementById('intro-marker');
   const reveal = document.getElementById('intro-reveal');
@@ -922,89 +616,36 @@ loadBets();
   const barTop = document.getElementById('intro-bar-top');
   const barBottom = document.getElementById('intro-bar-bottom');
 
-  let startTime = null;
+  function ease(t){return t<0.5?2*t*t:-1+(4-2*t)*t}
+  function lerp(a,b,t){return a+(b-a)*t}
 
-  // Timeline (ms):
-  // 0     - bars animate in
-  // 300   - text fades in (hidden behind marker)
-  // 500   - marker sweeps right (600ms duration)
-  // 1100  - reveal follows marker
-  // 1700  - tagline appears
-  // 2200  - pause
-  // 2600  - fade out
+  setTimeout(()=>{barTop.style.transition='width 0.4s cubic-bezier(.22,1,.36,1)';barTop.style.width='100%';barBottom.style.transition='width 0.4s cubic-bezier(.22,1,.36,1)';barBottom.style.width='100%'},50);
+  setTimeout(()=>{text.style.opacity='0.12';text.style.transition='opacity 0.3s ease'},300);
 
-  function ease(t) {
-    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-  }
-
-  function lerp(a, b, t) { return a + (b - a) * t; }
-
-  // Phase 1: bars (0-300ms)
-  setTimeout(() => {
-    barTop.style.transition = 'width 0.4s cubic-bezier(.22,1,.36,1)';
-    barTop.style.width = '100%';
-    barBottom.style.transition = 'width 0.4s cubic-bezier(.22,1,.36,1)';
-    barBottom.style.width = '100%';
-  }, 50);
-
-  // Phase 2: show text (dim)
-  setTimeout(() => {
-    text.style.opacity = '0.12';
-    text.style.transition = 'opacity 0.3s ease';
-  }, 300);
-
-  // Phase 3: marker sweep
-  setTimeout(() => {
-    marker.style.transition = 'none';
-    marker.style.width = '0%';
-    marker.style.left = '-2%';
-
-    let sweepStart = null;
-    const sweepDuration = 550;
-
-    function sweepMarker(ts) {
-      if (!sweepStart) sweepStart = ts;
-      const elapsed = ts - sweepStart;
-      const progress = Math.min(elapsed / sweepDuration, 1);
-      const eased = ease(progress);
-
-      // Marker leads by ~8%, reveal follows
-      const markerPos = lerp(-2, 108, eased);
-      const revealPos = lerp(-2, 108, Math.max(0, eased - 0.0));
-
-      marker.style.left = Math.min(markerPos, 105) + '%';
-      marker.style.width = '10%';
-
-      if (progress > 0.05) {
-        reveal.style.left = '-2%';
-        reveal.style.width = Math.min(revealPos + 2, 110) + '%';
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(sweepMarker);
-      } else {
-        // Hide marker after sweep
-        marker.style.transition = 'opacity 0.2s ease';
-        marker.style.opacity = '0';
-        text.style.opacity = '0';
-      }
+  setTimeout(()=>{
+    marker.style.transition='none';marker.style.width='0%';marker.style.left='-2%';
+    let sweepStart=null;const sweepDuration=550;
+    function sweepMarker(ts){
+      if(!sweepStart)sweepStart=ts;
+      const elapsed=ts-sweepStart;
+      const progress=Math.min(elapsed/sweepDuration,1);
+      const eased=ease(progress);
+      const markerPos=lerp(-2,108,eased);
+      const revealPos=lerp(-2,108,Math.max(0,eased));
+      marker.style.left=Math.min(markerPos,105)+'%';
+      marker.style.width='10%';
+      if(progress>0.05){reveal.style.left='-2%';reveal.style.width=Math.min(revealPos+2,110)+'%'}
+      if(progress<1){requestAnimationFrame(sweepMarker)}
+      else{marker.style.transition='opacity 0.2s ease';marker.style.opacity='0';text.style.opacity='0'}
     }
     requestAnimationFrame(sweepMarker);
-  }, 550);
+  },550);
 
-  // Phase 4: tagline
-  setTimeout(() => {
-    tagline.classList.add('show');
-  }, 1350);
-
-  // Phase 5: fade out
-  setTimeout(() => {
+  setTimeout(()=>{tagline.classList.add('show')},1350);
+  setTimeout(()=>{
     overlay.classList.add('hide');
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      document.body.style.overflow = '';
-    }, 600);
-  }, 2400);
+    setTimeout(()=>{overlay.style.display='none';document.body.style.overflow=''},600);
+  },2400);
 })();
 </script>
 </body>
